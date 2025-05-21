@@ -1,0 +1,36 @@
+name: Frontend CI Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Ejecuta esto en cada push a main
+
+jobs:
+  build-and-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Instalar dependencias
+        run: npm ci  # O "npm install"
+
+      - name: Ejecutar Linter
+        run: npm run lint
+
+      - name: Build del frontend
+        run: npm run build
+
+      - name: Subir artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-build
+          path: |
+            dist/
+            build/
