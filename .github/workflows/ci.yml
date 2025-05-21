@@ -19,7 +19,7 @@ jobs:
           node-version: '18'
 
       - name: Instalar dependencias
-        run: npm ci  # O "npm install"
+        run: npm install  # O "npm install"
 
       - name: Ejecutar Linter
         run: npm run lint
